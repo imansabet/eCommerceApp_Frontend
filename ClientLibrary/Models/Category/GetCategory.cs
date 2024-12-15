@@ -1,4 +1,6 @@
-﻿namespace ClientLibrary.Models.Category;
+﻿using ClientLibrary.Models.Product;
+
+namespace ClientLibrary.Models.Category;
 
 public class GetCategory
 {
