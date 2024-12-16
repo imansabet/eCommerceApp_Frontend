@@ -19,6 +19,7 @@ builder.Services.AddScoped<IApiCallHelper, ApiCallHelper>();
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 
 await builder.Build().RunAsync();
