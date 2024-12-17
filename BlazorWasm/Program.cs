@@ -24,10 +24,13 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
+builder.Services.AddScoped<RefreshTokenHandler>();
 
-builder.Services.AddHttpClient(Constant.ApiClient.Name , option => 
+builder.Services.AddHttpClient(Constant.ApiClient.Name, option =>
 {
     option.BaseAddress = new Uri("https://localhost:7073/api/");
-});
+}).AddHttpMessageHandler<RefreshTokenHandler>();
+
+builder.Services.AddAuthorizationCore();
 
 await builder.Build().RunAsync();
