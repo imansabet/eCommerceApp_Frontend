@@ -1,0 +1,34 @@
+﻿<h3>LoginComponent</h3>
+
+@code {
+    string AlertType = string.Empty;
+    string Message = string.Empty;
+
+    public LoginUser Login { get; set; } = new();
+    async Task LoginUser()
+    {
+        Message = string.Empty;
+        AlertType = string.Empty;
+        var result = await authenticationService.LoginUser(Login);
+        if(!result.Success)
+        {
+            Message = result.Message;
+            AlertType = "danger";
+            return;
+        }
+        string cookieValue = tokenService.FormToken(result.Token, result.RefreshToken);
+        await tokenService.SetCookie
+        (
+            Constant.Cookie.Name,
+            cookieValue,
+            Constant.Cookie.Days,
+            Constant.Cookie.Path
+        );
+
+        (authStateProvider as CustomAuthStateProvider)!.NotifyAuthenticationState();
+        NavManager.NavigateTo("/", true);
+
+
+    }
+
+}

@@ -31,6 +31,11 @@ builder.Services.AddHttpClient(Constant.ApiClient.Name, option =>
     option.BaseAddress = new Uri("https://localhost:7073/api/");
 }).AddHttpMessageHandler<RefreshTokenHandler>();
 
+
+builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddAuthorizationCore();
+
+
+
 
 await builder.Build().RunAsync();
